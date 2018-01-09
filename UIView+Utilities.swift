@@ -7,8 +7,9 @@
 
 import UIKit
 
+// MARK: - UIVIew parameters
+
 extension UIView {
-  /// UIVIew parameters
   
   ///  Width
   var width: CGFloat {
@@ -69,11 +70,19 @@ extension UIView {
   var bottom: CGFloat {
     return self.frame.origin.y + self.frame.size.height
   }
-  
-  /// Take UIView and round one or more corners
-  ///
-  /// - parameter corners: Corners to round
-  /// - parameter radius:  Corner radius
+}
+
+
+// MARK: - Add round corners to UIView
+
+extension UIView {
+  /**
+   Take UIView and round one or more corners
+   
+   - Parameters:
+   - corners: Corners to round
+   - radius: Corner radius
+   */
   func round(corners: UIRectCorner, radius: CGFloat) {
     let path = UIBezierPath(roundedRect:self.bounds,
                             byRoundingCorners:corners,
@@ -81,5 +90,26 @@ extension UIView {
     let maskLayer = CAShapeLayer()
     maskLayer.path = path.cgPath
     self.layer.mask = maskLayer
+  }
+}
+
+
+// MARK: - Get view's parent viewController
+
+extension UIView {
+  /**
+   UIView Parent viewController
+   */
+  var parentViewController: UIViewController? {
+    var parentResponder: UIResponder? = self
+    
+    while parentResponder != nil {
+      parentResponder = parentResponder!.next
+      if let viewController = parentResponder as? UIViewController {
+        return viewController
+      }
+    }
+    
+    return nil
   }
 }
