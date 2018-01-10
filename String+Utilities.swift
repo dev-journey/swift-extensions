@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-  /// Generate alphanumeric string as identifier
+  /// Generate alphanumeric string
   ///
   /// - Parameter length: String desired length
   /// - Returns: Alphanumeric string
